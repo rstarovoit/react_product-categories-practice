@@ -8,16 +8,15 @@ import categoriesFromServer from './api/categories';
 import { Category, User, Product } from './react-app-env';
 
 type FoundCategory = (categoryId: number) => Category | null;
-const getCategory: FoundCategory = (categoryId) => {
-  const foundCategory = categoriesFromServer
-    .find(category => (category.id === categoryId));
-
-  return foundCategory || null;
-};
+const getCategory: FoundCategory = (categoryId) => (
+  categoriesFromServer
+    .find(category => category.id === categoryId) || null
+);
 
 type FoundUser = (userId: number) => User | null;
 const getUser: FoundUser = (userId) => (
-  usersFromServer.find((user) => user.id === userId) || null
+  usersFromServer
+    .find((user) => user.id === userId) || null
 );
 
 const productsList = productsFromServer
@@ -53,6 +52,7 @@ export const App: React.FC = () => {
 
   const resetHandler = () => {
     setQuery('');
+    setUserFilter('');
   };
 
   const clearButtonHandler = () => {
